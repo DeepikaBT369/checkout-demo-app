@@ -1,0 +1,9 @@
+{
+  "name": "checkout-demo-app",
+  "version": "1.0.0",
+  "description": "Small demo app with known bugs, used as the target repo for the Ticket-to-PR pipeline.",
+  "scripts": {
+    "test": "node --test"
+  },
+  "license": "MIT"
+}
