@@ -25,7 +25,8 @@ function processCheckout(cart, ctx) {
   const items = resolveItems(cart);
   const totals = computeTotals(items);
   const address = resolveAddress(ctx);
-  if (items.some((i) => i.requiresPhysicalDelivery)) {
+  const needsShipping = items.some((i) => i.requiresPhysicalDelivery);
+  if (needsShipping) {
     validateAddress(address);
   }
   return proceedToPayment(totals, ctx, address);
