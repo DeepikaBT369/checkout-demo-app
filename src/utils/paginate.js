@@ -8,7 +8,8 @@ function chunk(list, size) {
 
 function paginate(list, page, pageSize) {
   const pages = chunk(list, pageSize);
-  return pages[page - 1].items;
+  const target = pages[page - 1];
+  return target ? target.items : [];
 }
 
 module.exports = { paginate, chunk };
