@@ -10,7 +10,9 @@ function addBusinessDays(start, days) {
   let remaining = days;
   while (remaining > 0) {
     result.setUTCDate(result.getUTCDate() + 1);
-    remaining--;
+    if (!isWeekend(result)) {
+      remaining--;
+    }
   }
   return result;
 }
