@@ -5,12 +5,23 @@ function isWeekend(date) {
   return d === 0 || d === 6;
 }
 
-function addBusinessDays(start, days) {
+const MS_PER_DAY = 24 * 60 * 60 * 1000;
+
+// UTC calendar day number, ignoring time of day.
+function dayNumber(date) {
+  return Math.floor(date.getTime() / MS_PER_DAY);
+}
+
+// holidays: optional array of Date objects or ISO date strings (YYYY-MM-DD).
+function addBusinessDays(start, days, holidays = []) {
+  const blocked = new Set(holidays.map((h) => dayNumber(new Date(h))));
   const result = new Date(start.getTime());
   let remaining = days;
   while (remaining > 0) {
     result.setUTCDate(result.getUTCDate() + 1);
-    remaining--;
+    if (!isWeekend(result) && !blocked.has(dayNumber(result))) {
+      remaining--;
+    }
   }
   return result;
 }
