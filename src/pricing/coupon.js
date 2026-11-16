@@ -2,7 +2,7 @@
 // A coupon stays valid for the whole of its expiry day (UTC).
 function isCouponValid(coupon, now = new Date()) {
   if (!coupon) return false;
-  if (coupon.expires && now > new Date(coupon.expires)) return false;
+  if (coupon.expires && now > new Date(coupon.expires + 'T23:59:59.999Z')) return false;
   return true;
 }
 
